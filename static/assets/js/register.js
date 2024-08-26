@@ -14,9 +14,13 @@ async function registerSW() {
     throw new Error("Your browser doesn't support service workers.");
   }
 
-  await connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
-  await navigator.serviceWorker.register(stockSW);
-
+  await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
+  await window.navigator.serviceWorker.register("/sw.js", {
+    scope: '/service/',
+  });
+  await window.navigator.serviceWorker.register("/oldsw.js", {
+    scope: '/sv/',
+  });
 }
 
 registerSW();
